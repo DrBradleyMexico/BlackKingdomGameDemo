@@ -1,0 +1,6 @@
+autopep8 @ file:///home/conda/feedstock_root/build_artifacts/autopep8_1671137333039/work
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
+keyboard @ file:///D:/bld/keyboard_1667261643700/work
+pycodestyle @ file:///home/conda/feedstock_root/build_artifacts/pycodestyle_1669306857274/work
+PySimpleGUI @ file:///home/conda/feedstock_root/build_artifacts/pysimplegui_1666050098189/work
+tomli @ file:///home/conda/feedstock_root/build_artifacts/tomli_1644342247877/work
