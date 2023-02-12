@@ -64,20 +64,33 @@ fight_object = Fighter('', int(), int(), int(), blank_weapon, '', '', 0, False)
 
 employer = Fighter('the Benefactor', 'a well-dressed man grinning back at you', 30, 4, 9, fists,
                    ["Assignment Contract", "Assignment Contract"], 100, True)
-goblin = Fighter('the Goblin', 'a stout green goblin picking his nose', 10, 3, 6, fists, ["Junk", "Junk"], 100, True)
-bow_guard = Fighter('the Guard', 'a dour-looking guard, bow in hand', 20, 4, 8, bow, ["Ferry Pass", "Bow"], 200, True)
-ferry_man = Fighter('the Ferryman', 'a silent operator of the boat', 20, 3, 3, fists, ["Junk", "Junk"], 100, False)
-sword_guard = Fighter('the Sword Guard', 'a dour-looking guard, sword in hand', 20, 4, 8, sword, ["Signed Pass", "Sword"], 300, True)
-mutant_beggar = Fighter('the Mutant', 'a man in tattered robes with tentacle fingers', 30, 3, 3, fists, ["Junk", "Junk"], 100, True)
-emergency_chest = Fighter('the Emergency Chest', 'a chest', 10, 0, 0, silence, ["Splinters", "Splinters"], 0, True)
-forest_elyrian = Fighter('the Hijacker', 'a frenzied looking Elyrian', 35, 4, 9, pistol, ["Ship Chest Key", "Pistol"], 600, True)
-captain = Fighter('the Captain', "a dour-looking captain", 30, 5, 7, fists, ["Junk", "Captain's Badge"], 200, True)
+goblin = Fighter('the Goblin', 'a stout green goblin picking his nose',
+                 10, 3, 6, fists, ["Junk", "Junk"], 100, True)
+bow_guard = Fighter('the Guard', 'a dour-looking guard, bow in hand',
+                    20, 4, 8, bow, ["Ferry Pass", "Bow"], 200, True)
+ferry_man = Fighter('the Ferryman', 'a silent operator of the boat',
+                    20, 3, 3, fists, ["Junk", "Junk"], 100, False)
+sword_guard = Fighter('the Sword Guard', 'a dour-looking guard, sword in hand',
+                      20, 4, 8, sword, ["Signed Pass", "Sword"], 300, True)
+mutant_beggar = Fighter('the Mutant', 'a man in tattered robes with tentacle fingers',
+                        30, 3, 3, fists, ["Junk", "Junk"], 100, True)
+emergency_chest = Fighter('the Emergency Chest', 'a chest', 10, 0, 0, silence, [
+                          "Splinters", "Splinters"], 0, True)
+forest_elyrian = Fighter('the Hijacker', 'a frenzied looking Elyrian', 35, 4, 9, pistol, [
+                         "Ship Chest Key", "Pistol"], 600, True)
+captain = Fighter('the Captain', "a dour-looking captain", 30,
+                  5, 7, fists, ["Junk", "Captain's Badge"], 200, True)
 no_attackables = Fighter('nothing', '', 0, 0, 0, 'nothing', 'nothing', 0, '')
-mel = Fighter("Mel", "a young woman in black dress", 30, 10, 8, fists, ["Charcoal Ring", "Junk"], 300, True)
-lyle = Fighter("Lyle", "a young man in black dress", 30, 10, 8, fists, ["Charcoal Ring", "Junk"], 300, False)
-jess = Fighter("Jess", "a young woman in black dress", 30, 10, 8, fists, ["Charcoal Ring", "Junk"], 300, False)
-kel = Fighter("Kel", "a young woman in black dress", 30, 10, 8, fists, ["Charcoal Ring", "Junk"], 300, False)
-erik = Fighter("Erik", "a brutishly large man", 40, 12, 6, fists, ["Bellwood Map", "Junk"], 800, True)
+mel = Fighter("Mel", "a young woman in black dress", 30, 10,
+              8, fists, ["Charcoal Ring", "Junk"], 300, True)
+lyle = Fighter("Lyle", "a young man in black dress", 30, 10,
+               8, fists, ["Charcoal Ring", "Junk"], 300, False)
+jess = Fighter("Jess", "a young woman in black dress", 30, 10,
+               8, fists, ["Charcoal Ring", "Junk"], 300, False)
+kel = Fighter("Kel", "a young woman in black dress", 30, 10,
+              8, fists, ["Charcoal Ring", "Junk"], 300, False)
+erik = Fighter("Erik", "a brutishly large man", 40, 12, 6,
+               fists, ["Bellwood Map", "Junk"], 800, True)
 
 # The player variables and scene variables
 '''
@@ -92,7 +105,7 @@ physique = 10
 total_hp = 50
 exp = 0
 '''
-name = ""                   #real character
+name = ""  # real character
 player_class = ""
 player_culture = ""
 luck = int()
@@ -108,10 +121,12 @@ player_weapon = fists
 inventory = set([])
 money = 0
 total_roll = 0
-player = Fighter(name, player_class, total_hp, physique, finesse, player_weapon, inventory, exp, True)
+player = Fighter(name, player_class, total_hp, physique,
+                 finesse, player_weapon, inventory, exp, True)
 
-scene_attackables = [Fighter('', '', int(), int(), int(), blank_weapon, '', exp, False)]
-current_zone = Scene("", "", scene_attackables, '','', '')
+scene_attackables = [
+    Fighter('', '', int(), int(), int(), blank_weapon, '', exp, False)]
+current_zone = Scene("", "", scene_attackables, '', '', '')
 
 
 # TODO: game progression post character generation. Scenes
@@ -119,57 +134,57 @@ current_zone = Scene("", "", scene_attackables, '','', '')
 g1 = ""
 
 f2 = Scene("Delia - Brackwater Council Building",
-            "\nYou flee the terrorists' house and follow the original instructions provided by the contract.\nYou find the large Brackwater council\n" \
-            "building right in the center of the Delia settlement.",
-            "The Crimson banners of the Brackwater company adorn the wooden halls of the building.\n" \
-            "Near the center of the main councilroom you see a hulking Northerner, eating an entire\n" \
-            "wheel of cheese by himself. This is definitely the guy you are looking for.",
-            [erik], ["Bellwood Map"], g1)
+           "\nYou flee the terrorists' house and follow the original instructions provided by the contract.\nYou find the large Brackwater council\n"
+           "building right in the center of the Delia settlement.",
+           "The Crimson banners of the Brackwater company adorn the wooden halls of the building.\n"
+           "Near the center of the main councilroom you see a hulking Northerner, eating an entire\n"
+           "wheel of cheese by himself. This is definitely the guy you are looking for.",
+           [erik], ["Bellwood Map"], g1)
 
 f1 = Scene("Delia - Brackwater Council Building",
-           "\nFreeranger Mel instructs you to meet with the Northerner at the Brackwater\nCouncil building near " \
-           "the center of town. You leave the\nlittle house and make your way there, intending to feign commitment\n" \
+           "\nFreeranger Mel instructs you to meet with the Northerner at the Brackwater\nCouncil building near "
+           "the center of town. You leave the\nlittle house and make your way there, intending to feign commitment\n"
            "to the original contract.",
-           "The Crimson banners of the Brackwater company adorn the wooden halls of the building.\n" \
-           "Near the center of the main councilroom you see a hulking Northerner, eating an entire\n" \
+           "The Crimson banners of the Brackwater company adorn the wooden halls of the building.\n"
+           "Near the center of the main councilroom you see a hulking Northerner, eating an entire\n"
            "wheel of cheese by himself. This is definitely the guy you are looking for.",
            [erik], ["Bellwood Map"], g1)
 
 e1 = Scene("A Small House in Delia",
-           "\nIt feels like no time has passed but when you open your eyes again, you see\n" \
-           "that you are now somewhere far from Thunder River. You are inside a dim shack\n" \
-           "made of wood and stone, and are surrounded on all sides of your bed by black-clothed\n" \
+           "\nIt feels like no time has passed but when you open your eyes again, you see\n"
+           "that you are now somewhere far from Thunder River. You are inside a dim shack\n"
+           "made of wood and stone, and are surrounded on all sides of your bed by black-clothed\n"
            "figures.",
-           "You are laying in bed, healing from the ship crash. The house you are in is dingy\n" \
-           "and reeks of the uncleanliness of frontier life. You must be on the edge of the Bellwood.\n" \
+           "You are laying in bed, healing from the ship crash. The house you are in is dingy\n"
+           "and reeks of the uncleanliness of frontier life. You must be on the edge of the Bellwood.\n"
            "There are people in tight, black clothes surrounding your rest bed.",
            [mel, lyle, jess, kel], ["Charcoal Ring"], f2)
 
 d1 = Scene("Aboard the Naughty Gull",
-           "\nYou make your way onto the Naughty Gull, flashing your signed pass to board.\n" \
-           "You feel relieved to be getting away from Dark Harbor proper, finding a small\n" \
-           "sense of gratitude to be heading East to the wild frontiers of the Bellwood.\n" \
-           "Your calm is cut short as the ship jerks with a loud bang. The ship has stopped!\n" \
-           "You feel as though time has frozen and when you come to your senses again, all\n" \
-           "You can hear is the frenzied shouting of the people on board. You hear the\n" \
+           "\nYou make your way onto the Naughty Gull, flashing your signed pass to board.\n"
+           "You feel relieved to be getting away from Dark Harbor proper, finding a small\n"
+           "sense of gratitude to be heading East to the wild frontiers of the Bellwood.\n"
+           "Your calm is cut short as the ship jerks with a loud bang. The ship has stopped!\n"
+           "You feel as though time has frozen and when you come to your senses again, all\n"
+           "You can hear is the frenzied shouting of the people on board. You hear the\n"
            "captain yell something about 'life jackets' in the emergency chest.",
-           "People are running around the sinking ship, it's chaos. You see the chest\n" \
-           "the captain must have been referring to. A small Forest Elyrian with long ears\n" \
-           "and the dress of Bombolor stands before the chest, gun and key in hand, keeping\n" \
+           "People are running around the sinking ship, it's chaos. You see the chest\n"
+           "the captain must have been referring to. A small Forest Elyrian with long ears\n"
+           "and the dress of Bombolor stands before the chest, gun and key in hand, keeping\n"
            "passengers from getting to the life jackets.",
            [captain, forest_elyrian, emergency_chest], ["Life Jacket"], e1)
 
 c1 = Scene("Thunder River",
-           "\nAfter your odd exchange with the guard and the goblin, you finally push onward.\nWith the Ferry Pass in " \
-           "hand, you make your way to Thunder River.\nThe river is actually comprised of several rivers, flowing down from\n" \
-           "the mountains of Hillsrun and feeding into one another down to the coast of Dark Harbor.\nYou can understand " \
+           "\nAfter your odd exchange with the guard and the goblin, you finally push onward.\nWith the Ferry Pass in "
+           "hand, you make your way to Thunder River.\nThe river is actually comprised of several rivers, flowing down from\n"
+           "the mountains of Hillsrun and feeding into one another down to the coast of Dark Harbor.\nYou can understand "
            "how the river got its name, as your ears are filled with the loud rushing\nsounds of flowing water.",
            "The roaring of water fills your ears. You see a ferry ahead, loading travelers to cross.",
            [ferry_man, mutant_beggar, sword_guard], ["Signed Pass"], d1)
 
 b1 = Scene("Road to Thunder River",
-           "\nYou should leave before someone sees what has just happened. After reading the assignment contract you gained, \n" \
-           "you decide to head East, the contract says that a Northerner in the small settlement of Delia, across Thunder River\n" \
+           "\nYou should leave before someone sees what has just happened. After reading the assignment contract you gained, \n"
+           "you decide to head East, the contract says that a Northerner in the small settlement of Delia, across Thunder River\n"
            "will be very interested to meet with you.",
            "The oppressive heat of the orange sun burns your neck. You see a guard laying near a broken cart, bow by his side.\n"
            "You also spot a little goblin some ways in the distance.",
@@ -177,9 +192,10 @@ b1 = Scene("Road to Thunder River",
 
 a1 = Scene("Outside the Hammersgate prison",
            "You step outside into the blistering heat of Dark Harbor, you see a man standing before you, feet planted in the sand.",
-           "There is a stinging hot breeze outside with air that tastes of salt.\n" \
+           "There is a stinging hot breeze outside with air that tastes of salt.\n"
            "The guards have removed your shackles and you are on the beach. There is a man before you.",
            [employer], ["Assignment Contract"], b1)
+
 
 def flush_input():
     try:
@@ -187,8 +203,10 @@ def flush_input():
         while msvcrt.kbhit():
             msvcrt.getch()
     except ImportError:
-        import sys, termios    #for linux/unix
+        import sys
+        import termios  # for linux/unix
         termios.tcflush(sys.stdin, termios.TCIOFLUSH)
+
 
 def start_game():   # start_game() will run the entire game, starting with the title text
     print(r'__________.__                __ ')
@@ -206,10 +224,14 @@ def start_game():   # start_game() will run the entire game, starting with the t
 
     print("\n Press enter to continue")
     keyboard.wait('enter')
+    flush_input()
     main_menu()
 
 # TODO: Change play to New Game, add Load Game option
+
+
 def main_menu():
+    flush_input()
     print("------------------------------------")
     print("|            Main Menu             |")
     print("|----------------------------------|")
@@ -232,9 +254,9 @@ def main_menu():
     else:
         print("Please enter a valid input. ")
         main_menu()
-    #else:
+    # else:
        # print("\nCommands \'play\', \'about\', or \'quit\' after the \'>\' must be spelled correctly.")
-        #main_menu()
+        # main_menu()
 
 # optional information that can be accessed if the player chooses 'about' at title menu
 # once exited, restarts the game back at the main menu
@@ -260,7 +282,8 @@ def about_screen():
     if back.upper() == "MENU":
         main_menu()
     else:
-        print("To go back to the main menu, enter 'menu' after the '>' prompt and hit enter.")
+        print(
+            "To go back to the main menu, enter 'menu' after the '>' prompt and hit enter.")
         about_screen()
 
 
@@ -278,9 +301,11 @@ def class_info():
     print("\n- Brutes are athletically talented. Brutes often work jobs as guards, doormen, bouncers, or knights.")
     print("-----------------------------------------------------------------------------------------------------------------------")
     time.sleep(0.50)
-    back = input("\nType 'back' and hit enter to go back and select class.\n> ")
+    back = input(
+        "\nType 'back' and hit enter to go back and select class.\n> ")
     while back.upper() != "BACK":
-        back = input("'back' must be entered to return to class selection.\n> ")
+        back = input(
+            "'back' must be entered to return to class selection.\n> ")
     pick_class()
 
 
@@ -298,9 +323,11 @@ def culture_info():
     print("\n- Hillsrun refers to the mountains of central Glennduran.\nPrimarily home to the stout Elyrian people who clip their long ears short and keep war dogs as pets.\nMountain Elyrians are also known as the Dog People.")
     time.sleep(0.50)
     print("-----------------------------------------------------------------------------------------------------------------------")
-    back = input("\nType 'back' and hit enter to go back and select culture.\n> ")
+    back = input(
+        "\nType 'back' and hit enter to go back and select culture.\n> ")
     while back.upper() != "BACK":
-        back = input("'back' must be entered to return to culture selection.\n> ")
+        back = input(
+            "'back' must be entered to return to culture selection.\n> ")
     pick_background()
 
 
@@ -319,6 +346,7 @@ def new_game():
         print("Please enter \"Y\" or \"N\" for Yes/No")
         new_game()
 
+
 def speaking(text):
     speed = 0.05
     for letter in text:
@@ -330,6 +358,7 @@ def speaking(text):
     flush_input()
 
 # Rolls initial stats and variables for the player's character after new game proceeds
+
 
 def roll_stats():
     global name
@@ -374,7 +403,7 @@ def roll_stats():
                 speaking(speechLuck0)
                 print(Style.RESET_ALL)
                 time.sleep(0.5)
-                speaking("\nThe guard explains that someone was going to post your bail today but died on the trip over.\n" + 
+                speaking("\nThe guard explains that someone was going to post your bail today but died on the trip over.\n" +
                          "\nThat's pretty unlucky isn't it? \n")
                 time.sleep(2.0)
                 print(Fore.RED)
@@ -382,16 +411,16 @@ def roll_stats():
                 print(Style.RESET_ALL)
                 time.sleep(2.0)
                 start_game()
-        except:
-            print(Fore.BLUE)
-            speaking(speech3)
-            speaking(speech4)
-            print(Style.RESET_ALL)
-            name = input("\n> ")
-            print(Fore.BLUE)
-            speaking(speech5)
-            print(Style.RESET_ALL)
-            return name, luck, resilience, finesse, insight, physique, total_hp
+            else:
+                print(Fore.BLUE)
+                speaking(speech3)
+                speaking(speech4)
+                print(Style.RESET_ALL)
+                name = input("\n> ")
+                print(Fore.BLUE)
+                speaking(speech5)
+                print(Style.RESET_ALL)
+                return name, luck, resilience, finesse, insight, physique, total_hp
         finally:
             pick_class()
     elif all_set.upper() == "N":
@@ -493,7 +522,8 @@ def pick_class():
         print(Fore.BLUE)
         speaking(speech2)
         print(Style.RESET_ALL)
-        print("\nEnter either \'Starchild\', \'Nomad\', \'Artisan\', \'Seer\', or \'Brute\'")
+        print(
+            "\nEnter either \'Starchild\', \'Nomad\', \'Artisan\', \'Seer\', or \'Brute\'")
         pick_class()
 
 
@@ -640,7 +670,8 @@ def redo_character_creation():  # Option for the player to start over if they do
             print("\n")
             speaking(current_zone.scene_transition)
             time.sleep(1.00)
-            scene(current_zone)     # takes player to the main game, starting at the first scene
+            # takes player to the main game, starting at the first scene
+            scene(current_zone)
     else:
         print("\nPlease enter either a \'Y\' or a \'N\'")
         redo_character_creation()
@@ -653,7 +684,8 @@ def attack():       # attack action that cycles through attackable enemies givin
     global scene_attackables
     for enemy in scene_attackables:    # look for attackable item/creature in scene
         print("\nDo you want to attack " + str(enemy.name) + "?")
-        confirm = input("(Y/N)" + "\n> ")   # confirm the player wants to attack it
+        # confirm the player wants to attack it
+        confirm = input("(Y/N)" + "\n> ")
         if confirm.upper() == "Y":
             if enemy.hp <= 0:
                 speaking("They are already dead. ")
@@ -669,7 +701,8 @@ def attack():       # attack action that cycles through attackable enemies givin
         else:
             print("Please enter \"Y\" or \"N\" for Yes/No")
             attack()
-    scene(current_zone)     # ultimately puts player back at the scene if nothing is attacked
+    # ultimately puts player back at the scene if nothing is attacked
+    scene(current_zone)
 
 
 def battle():
@@ -744,31 +777,34 @@ def loot():     # loot function is called after player survives a battle
     global current_zone
     global exp
     time.sleep(0.70)
-    roll_luck = random.randint(1, 6) + luck     # this is the basic luck roll. Die is 1d6 simulated here, adds luck
+    # this is the basic luck roll. Die is 1d6 simulated here, adds luck
+    roll_luck = random.randint(1, 6) + luck
     try:
         if roll_luck >= 12:     # if the player's roll + their luck stat exceeds 12, they get multiple loot if possible
             if fight_object.loot[0] != fight_object.loot[1]:
                 inventory.add(fight_object.loot[0])
                 inventory.add(fight_object.loot[1])
                 speaking("Lucky find! " + str(fight_object.loot[1]) + " and " + str(fight_object.loot[0]) +
-                      " found and added to inventory.")
+                         " found and added to inventory.")
                 return inventory, exp
             else:
                 inventory.add(fight_object.loot[0])
                 exp = exp + fight_object.exp
                 speaking(str(fight_object.loot[0]) + " found and added to inventory. Gained " + str(fight_object.exp) +
-                      " experience.")
+                         " experience.")
                 return inventory, exp
         else:
             inventory.add(fight_object.loot[0])
             exp = exp + fight_object.exp
             speaking(str(fight_object.loot[0]) + " found and added to inventory. Gained " + str(fight_object.exp) +
-                  " experience.")
+                     " experience.")
             return inventory, exp
     finally:
         level_up()  # after loot function runs, it goes to the level up function
 
 # TODO: add weapons as they come up later in development
+
+
 def equip():
     global player_weapon
     equipable_items = ['Bow', 'Sword', 'Laser Visor']
@@ -1097,12 +1133,15 @@ def help_menu():
     scene(current_zone)
 
 # a function that checks to see if the character can proceed to next zone
+
+
 def proceed():
     global current_zone
     global inventory
     for i in current_zone.proceed_conditions:           # iterates through list of key items in inventory
         if i in inventory:
-            current_zone = current_zone.next_scene      # if specific item is held, changes to next scene
+            # if specific item is held, changes to next scene
+            current_zone = current_zone.next_scene
             try:
                 return current_zone
             finally:
@@ -1111,7 +1150,8 @@ def proceed():
                 time.sleep(0.50)
                 scene(current_zone)
         else:
-            speaking("Something inside you prevents you from leaving. There is still something to be done here.")
+            speaking(
+                "Something inside you prevents you from leaving. There is still something to be done here.")
             scene(current_zone)
 
 
@@ -1123,7 +1163,8 @@ def talk():
     NPC_no = "They are not interested in talking with you."
     for NPC in scene_attackables:
         print("\n")
-        print("\nDo you want to talk to " + str(NPC.name) + "?")  # confirm the player wants to talk to it
+        # confirm the player wants to talk to it
+        print("\nDo you want to talk to " + str(NPC.name) + "?")
         confirm = input("(Y/N)" + "\n> ")
         if confirm.upper() == "Y":
             if NPC.chat_friendly is False:
@@ -1143,8 +1184,10 @@ def talk():
     scene(current_zone)
 
 # TODO: Add characters as project develops
+
+
 def chat():     # checks selected NPC against associated names to proceed to the correct interaction function
-                # there is one function per NPC at the moment. Each interaction is a specific and unique instance
+    # there is one function per NPC at the moment. Each interaction is a specific and unique instance
     global fight_object
     if fight_object.name == 'the Benefactor':
         employer_chat()
@@ -1200,7 +1243,8 @@ def scene(zone):
     inv_text = "\nYou check your things and reassess yourself. \n"
     current_zone = zone
     scene_attackables = current_zone.scene_attackables
-    acceptable_inputs = ['attack', 'look', 'talk', 'proceed', 'inventory', 'equip', 'talk', 'help']
+    acceptable_inputs = ['attack', 'look', 'talk',
+                         'proceed', 'inventory', 'equip', 'talk', 'help']
     time.sleep(0.75)
     print("\n------------------------------------")
     print(str(current_zone.name))
@@ -1237,7 +1281,8 @@ def scene(zone):
                   "\n | Culture: " + str(player_culture) +
                   "\n | Level: " + str(level) +
                   "\n | Total HP: " + str(total_hp) +
-                  "\n | Weapon: " + player_weapon.name + " (+" + str(player_weapon.attack) + " damage)"
+                  "\n | Weapon: " + player_weapon.name +
+                  " (+" + str(player_weapon.attack) + " damage)"
                   "\n | Luck: " + str(luck) +
                   "\n | Finesse: " + str(finesse) +
                   "\n | Insight: " + str(insight) +
@@ -1474,7 +1519,8 @@ def sword_guard_chat():
                     print("Success!")
                     time.sleep(0.50)
                     inventory.add("Ferry Pass")
-                    speaking("You manage to swipe a Ferry Pass from the guard while he's rambling on.")
+                    speaking(
+                        "You manage to swipe a Ferry Pass from the guard while he's rambling on.")
                     speaking("Ferry Pass added to inventory!")
                     time.sleep(0.50)
                     scene(current_zone)
@@ -1519,7 +1565,8 @@ def emergency_chest_chat():
         speaking(text2)
         scene(current_zone)
     else:
-        choice = input("\nDo you want to open the chest with a key?\n(Y/N)\n> ")
+        choice = input(
+            "\nDo you want to open the chest with a key?\n(Y/N)\n> ")
         while choice.upper() != "Y" and choice.upper() != "N":
             choice = input("Please enter Y or N\n> ")
         if choice.upper() == 'Y':
@@ -1533,7 +1580,8 @@ def emergency_chest_chat():
                 act_one()
             else:
                 speaking(text3)
-                choice = input("\nDo you want to make an Insight roll?\n(Y/N)\n> ")
+                choice = input(
+                    "\nDo you want to make an Insight roll?\n(Y/N)\n> ")
                 while choice.upper() != "Y" and choice.upper() != "N":
                     choice = input("Please enter Y or N\n> ")
                 if choice.upper() == "Y":
@@ -1566,9 +1614,9 @@ def emergency_chest_chat():
                     speaking("You decide against it.")
                     scene(current_zone)
         elif choice.upper() == "N":
-                    time.sleep(0.50)
-                    speaking("You decide against it.")
-                    scene(current_zone)
+            time.sleep(0.50)
+            speaking("You decide against it.")
+            scene(current_zone)
 
 
 def captain_chat():
@@ -1579,7 +1627,8 @@ def captain_chat():
         scene(current_zone)
     else:
         print(Fore.BLUE)
-        speaking("Ya need ta grab a Life Jacket from the safety chest\nand abandon ship! The Naughty Gull, she be sinking!")
+        speaking(
+            "Ya need ta grab a Life Jacket from the safety chest\nand abandon ship! The Naughty Gull, she be sinking!")
         print(Style.RESET_ALL)
         time.sleep(0.50)
         scene(current_zone)
@@ -1624,16 +1673,19 @@ def hijacker_chat():
             speaking(speech3)
             print(Style.RESET_ALL)
             time.sleep(0.50)
-            speaking("\nThe long-eared Elyrian hijacker aims the pistol at you. You decide to back away.")
+            speaking(
+                "\nThe long-eared Elyrian hijacker aims the pistol at you. You decide to back away.")
         else:
             time.sleep(0.50)
-            speaking("\nThe long-eared Elyrian man with a gun has a wild look in his eye, he is blocking the chest.")
+            speaking(
+                "\nThe long-eared Elyrian man with a gun has a wild look in his eye, he is blocking the chest.")
             time.sleep(0.50)
             print(Fore.CYAN)
             speaking(speech4)
             print(Style.RESET_ALL)
             time.sleep(0.50)
-            speaking("\nThe Elyrian is wild-eyed and threatening all passengers who approach.\nDo you want to make a Finesse and Physique roll?")
+            speaking(
+                "\nThe Elyrian is wild-eyed and threatening all passengers who approach.\nDo you want to make a Finesse and Physique roll?")
             choice = input("\n> ")
             while choice.upper() != "Y" and choice.upper() != "N":
                 choice = input("Please enter either Y or N\n> ")
@@ -1647,8 +1699,8 @@ def hijacker_chat():
                     print("\nSuccess!")
                     time.sleep(0.50)
                     inventory.add("Ship Chest Key")
-                    speaking("\nYou wait for him to take his eyes off you and when he does you\nrush toward him, tackling him off the side of the ship " + 
-                    "and\ngrabbing the chest key from his hand.")
+                    speaking("\nYou wait for him to take his eyes off you and when he does you\nrush toward him, tackling him off the side of the ship " +
+                             "and\ngrabbing the chest key from his hand.")
                     forest_elyrian.hp = 0
                     exp = exp + forest_elyrian.exp
                     try:
@@ -1672,8 +1724,8 @@ def hijacker_chat():
 def act_one():
     global inventory
     text1 = "\nYou quickly put on the Life Jacket and rush to the side of the sinking\nship. The powerful current of Thunder River roars all around you as you jump overboard." \
-    "\nYou wake up some time later. You are laying down prone in the rocky banks of\nthe eastern side of Thunder River. Your body aches but you seem relatively okay." \
-    "\nThere is no trace left of the Naughty Gull."
+        "\nYou wake up some time later. You are laying down prone in the rocky banks of\nthe eastern side of Thunder River. Your body aches but you seem relatively okay." \
+        "\nThere is no trace left of the Naughty Gull."
     text2 = "\nYou try to get up but the pain is too much. You begin to wait for some time......\nEventually you fall asleep."
     text3 = "\nYou just want to lay here and rest..."
     speech1 = "\nHey! Hey, are you alive?"
@@ -1783,5 +1835,6 @@ def erik_chat():
     speaking(text1)
     time.sleep(0.50)
     main_menu()
+
 
 start_game()
