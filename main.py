@@ -84,7 +84,7 @@ erik = Fighter("Erik", "a brutishly large man", 40, 12, 6, fists, ["Bellwood Map
 name = "TEST CHARACTER"     # character for testing code
 player_class = ""
 player_culture = "Elyrian (Forest)"
-luck = 40
+luck = 0
 resilience = 8
 finesse = 4
 insight = 3
@@ -112,6 +112,7 @@ player = Fighter(name, player_class, total_hp, physique, finesse, player_weapon,
 
 scene_attackables = [Fighter('', '', int(), int(), int(), blank_weapon, '', exp, False)]
 current_zone = Scene("", "", scene_attackables, '','', '')
+
 
 # TODO: game progression post character generation. Scenes
 
@@ -180,6 +181,14 @@ a1 = Scene("Outside the Hammersgate prison",
            "The guards have removed your shackles and you are on the beach. There is a man before you.",
            [employer], ["Assignment Contract"], b1)
 
+def flush_input():
+    try:
+        import msvcrt
+        while msvcrt.kbhit():
+            msvcrt.getch()
+    except ImportError:
+        import sys, termios    #for linux/unix
+        termios.tcflush(sys.stdin, termios.TCIOFLUSH)
 
 def start_game():   # start_game() will run the entire game, starting with the title text
     print(r'__________.__                __ ')
@@ -210,6 +219,7 @@ def main_menu():
     print("------------------------------------")
     print("\n You can interact with the menu by typing \'play\', \'about\', or \'quit\' after the \'>\' prompt and" +
           " hitting enter.")
+    flush_input()
     selection = (input("\n> "))
     while selection.upper() not in ["PLAY", "ABOUT", "QUIT"]:
         selection = (input("Enter a valid input:\n> "))
@@ -309,12 +319,16 @@ def new_game():
         print("Please enter \"Y\" or \"N\" for Yes/No")
         new_game()
 
-
 def speaking(text):
+    speed = 0.05
     for letter in text:
+        if keyboard.is_pressed('space'):
+            speed = 0
         sys.stdout.write(letter)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(speed)
+    flush_input()
+
 # Rolls initial stats and variables for the player's character after new game proceeds
 
 def roll_stats():
@@ -330,7 +344,7 @@ def roll_stats():
     speaking(speech1)
     print(Style.RESET_ALL)
 
-    luck = random.randint(1, 10)
+    luck = random.randint(0, 10)
     resilience = random.randint(1, 10)
     physique = random.randint(1, 10)
     finesse = random.randint(1, 10)
@@ -355,21 +369,29 @@ def roll_stats():
 
     if all_set.upper() == "Y":
         try:
-            print(Fore.BLUE)
-            if player.luck == 0:
-                speaking(speechLuck0)
-                time.sleep(0.05)
-                print("\n\"Pretty unlucky")
-                main_menu()
-            else:
-                speaking(speech3)
-                speaking(speech4)
-                print(Style.RESET_ALL)
-                name = input("\n> ")
+            if luck == 0:
                 print(Fore.BLUE)
-                speaking(speech5)
+                speaking(speechLuck0)
                 print(Style.RESET_ALL)
-                return name, luck, resilience, finesse, insight, physique, total_hp
+                time.sleep(0.5)
+                speaking("\nThe guard explains that someone was going to post your bail today but died on the trip over.\n" + 
+                         "\nThat's pretty unlucky isn't it? \n")
+                time.sleep(2.0)
+                print(Fore.RED)
+                speaking("Game over you unlucky little freak\n")
+                print(Style.RESET_ALL)
+                time.sleep(2.0)
+                start_game()
+        except:
+            print(Fore.BLUE)
+            speaking(speech3)
+            speaking(speech4)
+            print(Style.RESET_ALL)
+            name = input("\n> ")
+            print(Fore.BLUE)
+            speaking(speech5)
+            print(Style.RESET_ALL)
+            return name, luck, resilience, finesse, insight, physique, total_hp
         finally:
             pick_class()
     elif all_set.upper() == "N":
