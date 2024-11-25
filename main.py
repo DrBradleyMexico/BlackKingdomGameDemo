@@ -93,6 +93,7 @@ erik = Fighter("Erik", "a brutishly large man", 40, 12, 6,
                fists, ["Bellwood Map", "Junk"], 800, True)
 
 # The player variables and scene variables
+
 '''
 name = "TEST CHARACTER"     # character for testing code
 player_class = ""
@@ -101,9 +102,10 @@ luck = 0
 resilience = 8
 finesse = 4
 insight = 3
-physique = 10
+physique = 50
 total_hp = 50
 exp = 0
+
 '''
 name = ""  # real character
 player_class = ""
@@ -115,6 +117,7 @@ insight = int()
 physique = int()
 total_hp = int()
 exp = 0
+
 
 level = 1
 player_weapon = fists
@@ -179,7 +182,8 @@ c1 = Scene("Thunder River",
            "hand, you make your way to Thunder River.\nThe river is actually comprised of several rivers, flowing down from\n"
            "the mountains of Hillsrun and feeding into one another down to the coast of Dark Harbor.\nYou can understand "
            "how the river got its name, as your ears are filled with the loud rushing\nsounds of flowing water.",
-           "The roaring of water fills your ears. You see a ferry ahead, loading travelers to cross.",
+           "The roaring of water fills your ears. You see a ferry ahead, loading travelers to cross. You see a guard, a ferryman\n"
+           "and a strange man trying to board.",
            [ferry_man, mutant_beggar, sword_guard], ["Signed Pass"], d1)
 
 b1 = Scene("Road to Thunder River",
@@ -223,7 +227,6 @@ def start_game():   # start_game() will run the entire game, starting with the t
     print(r'         \/       \//_____/      \/            \/ ')
 
     print("\n Press enter to continue")
-    keyboard.wait('enter')
     flush_input()
     main_menu()
 
@@ -796,8 +799,14 @@ def loot():     # loot function is called after player survives a battle
         else:
             inventory.add(fight_object.loot[0])
             exp = exp + fight_object.exp
-            speaking(str(fight_object.loot[0]) + " found and added to inventory. Gained " + str(fight_object.exp) +
-                     " experience.")
+            print(Fore.GREEN)
+            speaking(str(fight_object.loot[0]))
+            print(Style.RESET_ALL)
+            speaking("found and added to inventory. Gained ")
+            print(Fore.YELLOW)
+            speaking(str(fight_object.exp) +
+                " experience.")
+            print(Style.RESET_ALL)
             return inventory, exp
     finally:
         level_up()  # after loot function runs, it goes to the level up function
@@ -844,255 +853,62 @@ def level_up():
     global physique
     global total_hp
     global level
-    if exp >= 100 and level < 2:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        try:
+    level_thresholds = [100, 300, 600, 1000, 1600, 2400, 3400]  # exp targets for each level in ascending order
+
+    # Keep leveling up while the player's experience is enough to meet the next threshold
+    while True:
+        # Check if the player can level up by comparing experience with the threshold
+        if level - 1 < len(level_thresholds) and exp >= level_thresholds[level - 1]:
+            level += 1  # Increase the level
+            print(Fore.GREEN)
+            speaking("\nLevel up!")
+            print(Style.RESET_ALL)
+            time.sleep(0.50)
+
+            # Ask the player which stat to improve
+            speaking("Select physique, finesse, luck, insight, or resilience to improve")
+            selection = input("\nChoose a stat to improve " + "\n> ")
+
+            # Stat selection and improvement
             if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
+                physique += 2
+                print("Physique increased to", physique)
             elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
+                finesse += 2
+                print("Finesse increased to", finesse)
             elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
+                luck += 2
+                print("Luck increased to", luck)
             elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
+                insight += 2
+                print("Insight increased to", insight)
             elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
+                resilience += 2
+                total_hp += 6  # Assuming resilience also increases total HP
+                print(f"Resilience increased to {resilience}, Total HP increased to {total_hp}")
             else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
+                print("Enter a valid stat to improve.")
+                continue  # If invalid input, prompt again for the same level-up
+
+            # Show updated character info
             time.sleep(0.50)
             print("\n | Name: " + str(name) +
                   "\n | Class: " + str(player_class) +
                   "\n | Culture: " + str(player_culture) +
                   "\n | Level: " + str(level) +
+                  "\n | Total Exp: " + str(exp) +
                   "\n | Total HP: " + str(total_hp) +
                   "\n | Luck: " + str(luck) +
                   "\n | Finesse: " + str(finesse) +
                   "\n | Insight: " + str(insight) +
                   "\n | Resilience: " + str(resilience) +
                   "\n | Physique: " + str(physique))
-            scene(current_zone)
-    if exp >= 300 and level < 3:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        try:
-            if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
-            elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
-            elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
-            elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
-            elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
-            else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
-            time.sleep(0.50)
-            print("\n | Name: " + str(name) +
-                  "\n | Class: " + str(player_class) +
-                  "\n | Culture: " + str(player_culture) +
-                  "\n | Level: " + str(level) +
-                  "\n | Total HP: " + str(total_hp) +
-                  "\n | Luck: " + str(luck) +
-                  "\n | Finesse: " + str(finesse) +
-                  "\n | Insight: " + str(insight) +
-                  "\n | Resilience: " + str(resilience) +
-                  "\n | Physique: " + str(physique))
-            scene(current_zone)
-    if exp >= 700 and level < 4:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        try:
-            if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
-            elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
-            elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
-            elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
-            elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
-            else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
-            time.sleep(0.50)
-            print("\n | Name: " + str(name) +
-                  "\n | Class: " + str(player_class) +
-                  "\n | Culture: " + str(player_culture) +
-                  "\n | Level: " + str(level) +
-                  "\n | Total HP: " + str(total_hp) +
-                  "\n | Luck: " + str(luck) +
-                  "\n | Finesse: " + str(finesse) +
-                  "\n | Insight: " + str(insight) +
-                  "\n | Resilience: " + str(resilience) +
-                  "\n | Physique: " + str(physique))
-            scene(current_zone)
-    if exp >= 1500 and level < 5:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        try:
-            if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
-            elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
-            elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
-            elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
-            elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
-            else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
-            time.sleep(0.50)
-            print("\n | Name: " + str(name) +
-                  "\n | Class: " + str(player_class) +
-                  "\n | Culture: " + str(player_culture) +
-                  "\n | Level: " + str(level) +
-                  "\n | Total HP: " + str(total_hp) +
-                  "\n | Luck: " + str(luck) +
-                  "\n | Finesse: " + str(finesse) +
-                  "\n | Insight: " + str(insight) +
-                  "\n | Resilience: " + str(resilience) +
-                  "\n | Physique: " + str(physique))
-            scene(current_zone)
-    if exp >= 3100 and level < 5:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        time.sleep(0.50)
-        try:
-            if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
-            elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
-            elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
-            elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
-            elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
-            else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
-            time.sleep(0.50)
-            print("\n | Name: " + str(name) +
-                  "\n | Class: " + str(player_class) +
-                  "\n | Culture: " + str(player_culture) +
-                  "\n | Level: " + str(level) +
-                  "\n | Total HP: " + str(total_hp) +
-                  "\n | Luck: " + str(luck) +
-                  "\n | Finesse: " + str(finesse) +
-                  "\n | Insight: " + str(insight) +
-                  "\n | Resilience: " + str(resilience) +
-                  "\n | Physique: " + str(physique))
-            scene(current_zone)
-    if exp >= 6300 and level < 6:
-        level += 1
-        print(Fore.GREEN)
-        speaking("\nLevel up!")
-        print(Style.RESET_ALL)
-        time.sleep(0.50)
-        speaking("Select physique, finesse, luck, insight, or resilience to improve")
-        selection = input("\nChoose a stat to improve " + "\n> ")
-        try:
-            if selection.upper() == "PHYSIQUE":
-                physique = physique + 2
-                return physique
-            elif selection.upper() == "FINESSE":
-                finesse = finesse + 2
-                return finesse
-            elif selection.upper() == "LUCK":
-                luck = luck + 2
-                return luck
-            elif selection.upper() == "INSIGHT":
-                insight = insight + 2
-                return insight
-            elif selection.upper() == "RESILIENCE":
-                resilience = resilience + 2
-                total_hp = total_hp + 6
-                return resilience, total_hp
-            else:
-                print("Enter a valid stat to improve. ")
-                level_up()
-        finally:
-            time.sleep(0.50)
-            print("\n | Name: " + str(name) +
-                  "\n | Class: " + str(player_class) +
-                  "\n | Culture: " + str(player_culture) +
-                  "\n | Level: " + str(level) +
-                  "\n | Total HP: " + str(total_hp) +
-                  "\n | Luck: " + str(luck) +
-                  "\n | Finesse: " + str(finesse) +
-                  "\n | Insight: " + str(insight) +
-                  "\n | Resilience: " + str(resilience) +
-                  "\n | Physique: " + str(physique))
-            scene(current_zone)
-    else:
-        scene(current_zone)
+
+        else:
+            break  # End when no further level-ups are possible
+
+    # After all level-ups, continue the game
+    scene(current_zone)
 
 
 def remove(item):
@@ -1243,8 +1059,10 @@ def scene(zone):
     inv_text = "\nYou check your things and reassess yourself. \n"
     current_zone = zone
     scene_attackables = current_zone.scene_attackables
-    acceptable_inputs = ['attack', 'look', 'talk',
-                         'proceed', 'inventory', 'equip', 'talk', 'help']
+    acceptable_inputs = ['attack', 'a', 'A', 'Attack', 'ATTACK', 'look', 'LOOK', 'L', 'l', 'Look', 
+                         'talk', 'Talk', 'TALK', 't', 'T', 'p', 'PROCEED', 'Proceed', 'P', 'proceed', 
+                         'inventory', 'i', 'I', 'Inventory', 'INVENTORY', 'equip', 'e', 'E', 'Equip', 'EQUIP',
+                         'help', 'HELP', 'Help', 'h', 'H']
     time.sleep(0.75)
     print("\n------------------------------------")
     print(str(current_zone.name))
@@ -1257,17 +1075,17 @@ def scene(zone):
         print("\nPlease enter an acceptable input. ")
         scene(current_zone)
     else:
-        if action.upper() == "ATTACK":
+        if action.upper() == "ATTACK" or action.upper() == "A":
             try:
                 return scene_attackables
             finally:
                 attack()
-        elif action.upper() == "LOOK":
+        elif action.upper() == "LOOK" or action.upper() == "L":
             print("\nYou take a look around. \n")
             time.sleep(0.50)
             speaking(current_zone.description)
             scene(current_zone)
-        elif action.upper() == "INVENTORY":
+        elif action.upper() == "INVENTORY" or action.upper() == "I":
             speaking(inv_text)
             time.sleep(0.50)
             print("Bag: ")
@@ -1280,6 +1098,7 @@ def scene(zone):
                   "\n | Class: " + str(player_class) +
                   "\n | Culture: " + str(player_culture) +
                   "\n | Level: " + str(level) +
+                  "\n | Total Exp: " + str(exp) +
                   "\n | Total HP: " + str(total_hp) +
                   "\n | Weapon: " + player_weapon.name +
                   " (+" + str(player_weapon.attack) + " damage)"
@@ -1290,13 +1109,13 @@ def scene(zone):
                   "\n | Physique: " + str(physique))
             time.sleep(0.50)
             scene(current_zone)
-        elif action.upper() == "HELP":
+        elif action.upper() == "HELP" or action.upper() == "H":
             help_menu()
-        elif action.upper() == "EQUIP":
+        elif action.upper() == "EQUIP" or action.upper() == "E":
             equip()
-        elif action.upper() == "PROCEED":
+        elif action.upper() == "PROCEED" or action.upper() == "P":
             proceed()
-        elif action.upper() == "TALK":
+        elif action.upper() == "TALK" or action.upper() == "T":
             talk()
         else:
             print("\nPlease enter an acceptable input. ")
